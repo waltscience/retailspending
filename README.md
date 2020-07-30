@@ -7,4 +7,4 @@ Comparing the effect of Coronavirus vs. the health of US counties
 
 Data sources: 
 
-Retail sales data - US Census Bureau Monthly Retail Trade https://www.census.gov/retail/index.html
+Retail sales data - US Census Bureau Monthly Retail Trade, retrieved on July 30, 2020 from https://www.census.gov/retail/index.html
