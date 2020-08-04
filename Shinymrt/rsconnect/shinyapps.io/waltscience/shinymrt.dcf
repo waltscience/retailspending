@@ -1,0 +1,10 @@
+name: shinymrt
+title:
+username:
+account: waltscience
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2638920
+bundleId: 3471430
+url: https://waltscience.shinyapps.io/shinymrt/
+when: 1596502287.22872
