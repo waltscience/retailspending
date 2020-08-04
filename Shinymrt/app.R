@@ -13,10 +13,10 @@ rs <- data.frame(recession = c("r1", "r2", "r3"),
 ui <- fluidPage(
   
   # App title ----
-  titlePanel("Retail Sales"),
+  titlePanel("Retail Spending"),
   
   # Sidebar layout with input and output definitions ----
-  sidebarLayout(
+  sidebarLayout(position = "right",
     
     # Sidebar panel for inputs ----
     sidebarPanel(
@@ -31,7 +31,7 @@ ui <- fluidPage(
                   sep=""
                   ),
       
-      radioButtons(inputId = "s",
+      selectInput(inputId = "s",
                   choices = nam,
                   label = "Sector",
                   )
