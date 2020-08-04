@@ -31,21 +31,21 @@ write.csv(spending, "spending.csv", row.names = FALSE)                # write fi
 
 dat <- read.csv("spending.csv", header = TRUE)                        # load cleaned data
 dat$Date <- as.Date(dat$Date, "%Y-%m-%d")                             # set date as date
-s20p <- subset(dat, Date >= "2019-11-01" & Date < "2020-03-01")       # subset data for 4 months pre-covid sales
-s20p$Date <- c(1:4)                                                   # change date to numeric to make x-scale unit in linear regression = month instead of day
-s20a <- subset(dat, Date >= "2020-02-01" & Date < "2020-07-01")       # subset data for 1 month pre-covid saled and 4 months of covid sales
+s20p <- subset(dat, Date >= "2019-02-01" & Date < "2020-01-01")       # subset data for 7 months pre-covid sales
+s20p$Date <- c(1:11)                                                  # change date to numeric to make x-scale unit in linear regression = month instead of day
+s20a <- subset(dat, Date >= "2020-02-01" & Date < "2020-07-01")       # subset data for 1 month pre-covid sales and 4 months of covid sales
 slps <- as.data.frame(matrix(ncol = ncol(s20p)))                      # initialize a data frame
 colnames(slps) <- colnames(s20p)                                      # copy data frame column names
 for (i in 1:(length(s20p[1, ]) - 1)) {                                # loop through columns and fit lm to each one
     slps[1, i] <- lm(s20p[, i] ~ s20p$Date)$coefficients[2]
 }
-slps <- slps * 4                                                      # multiply mean monthly slope * 4 months to get cumulative projected sales
-mom <- as.data.frame(matrix(ncol = 17))                               # initialize data frame for month-over-month sales difference
-colnames(mom) <- colnames(s20a[, -18])                                # copy data frame column names
-for (k in 2:length(s20a[, 1])){                                       # loop to calculate month-over-month sales difference
-  mom <- rbind(mom, (s20a[k, -18] - s20a[k-1, -18]))
+slps <- slps[, -18]                                                   # remove date column
+cumulpred <- s20a[1, -18]                                             # initialize a data frame with Feb 2020 sales
+for(j in 2:length(s20a[, 1])) {                                       # loop to iteratively add predicted change in sales each month, to the previous month
+  cumulpred[j, ] <- cumulpred[j-1, -18] + slps
 }
-mom <- colSums(mom[2:5, ])                                            # sum month-over-month sales differences to get cumulative covid sales for 4 months
-chngsal <- ((mom - slps[, -18]) / abs(slps[, -18])) * 100             # calculate percent change in sales from projected
-chngsal[2, ]  <- mom - slps[, -18]                                    # calculate dollar change in sales from projected
-write.csv(t(chngsal[, -18]), "saleschange.csv", row.names = TRUE)  # write file to folder
+cumulpred <- as.data.frame(t(colSums(cumulpred[c(2:5), ])))
+cumulact <- as.data.frame(t(colSums(s20a[c(2:5), -18])))              # sum March through June actual sales to get total cumulative actual sales for four months
+chngsal <- ((cumulact - cumulpred) / abs(cumulpred)) * 100            # calculate percent change in sales from projected
+chngsal[2, ]  <- cumulact - cumulpred                                 # calculate dollar change in sales from projected
+write.csv(t(chngsal), "saleschange.csv", row.names = TRUE)     # write file to folder
