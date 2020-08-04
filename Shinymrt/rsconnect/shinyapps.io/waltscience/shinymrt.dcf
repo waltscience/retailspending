@@ -5,6 +5,6 @@ account: waltscience
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2638920
-bundleId: 3471430
+bundleId: 3473171
 url: https://waltscience.shinyapps.io/shinymrt/
-when: 1596502287.22872
+when: 1596542639.49677
