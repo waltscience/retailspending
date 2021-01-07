@@ -3,7 +3,7 @@
 Comparing retail spending across sectors
 
 ## As GDP hits historic lows, is there anything we are still spending money on?
-### Author: Chris Walter - [Retail Spending Article](https://chriswalter.info/retailsales/)
+### Author: Chris Walter - [Retail Spending Article](https://waltscienceblog.github.io/retailsales/)
 
 Data sources: Retail sales data - US Census Bureau Monthly Retail Trade, retrieved on July 30, 2020 from https://www.census.gov/retail/index.html
 
