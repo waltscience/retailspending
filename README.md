@@ -1,5 +1,5 @@
 # retailspending
-Comparing retail spending across sectors
+Comparing changes in retail spending across sectors
 
 ## As GDP hits historic lows, is there anything we are still spending money on?
 ### Author: Chris Walter - [Retail Spending Article](https://waltscienceblog.github.io/retailsales/)
